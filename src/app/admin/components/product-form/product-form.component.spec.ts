@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { ProductFormComponent } from './product-form.component';
 
-xdescribe('ProductFormComponent', () => {
+describe('ProductFormComponent', () => {
   let component: ProductFormComponent;
   let fixture: ComponentFixture<ProductFormComponent>;
 

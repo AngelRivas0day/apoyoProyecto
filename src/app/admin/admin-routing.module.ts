@@ -39,6 +39,14 @@ const routes: Routes = [
         path: 'products/edit/:id',
         component: ProductEditComponent
       },
+      {
+        path: 'pdf',
+        loadChildren: () => import('./pdf/pdf.module').then(m => m.PdfModule)
+      },
+      {
+        path: 'dates',
+        loadChildren: () => import('./dates/dates.module').then(m => m.DatesModule)
+      },
     ]
   }
 ];

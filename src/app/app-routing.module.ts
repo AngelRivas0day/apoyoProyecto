@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
+import { PreloadService } from './core/services/preload.service';
 
-import { AdminGuard } from './core/guards/admin.guard';
+import { QuicklinkStrategy } from 'ngx-quicklink';
+
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {
@@ -17,15 +20,15 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        loadChildren: () => {
+          return import('./home/home.module').then(m => m.HomeModule);
+        },
       },
       {
         path: 'products',
-        loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
-      },
-      {
-        path: 'contact',
-        loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
+        loadChildren: () => {
+          return import('./product/product.module').then(m => m.ProductModule);
+        },
       },
       {
         path: 'order',
@@ -34,6 +37,10 @@ const routes: Routes = [
       {
         path: 'demo',
         loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
       },
     ]
   },
@@ -54,7 +61,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
+    enableTracing: false,
+    preloadingStrategy: QuicklinkStrategy
   })],
   exports: [RouterModule]
 })

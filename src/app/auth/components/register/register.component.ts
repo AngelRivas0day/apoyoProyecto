@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/services/auth.service';
+
+import { AuthService } from './../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -23,11 +24,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(event: Event) {
+  register(event: Event) {
     event.preventDefault();
-    console.log(this.form.value);
-    if(this.form.valid){
-      this.authService.createUser(this.form.value.email, this.form.value.password).then(()=>{
+    if (this.form.valid) {
+      const value = this.form.value;
+      this.authService.createUser(value.email, value.password)
+      .then(() => {
         this.router.navigate(['/auth/login']);
       });
     }

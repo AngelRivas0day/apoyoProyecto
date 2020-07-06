@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,28 +7,22 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
   constructor(
-    private af: AngularFireAuth,
-    private http: HttpClient
+    private af: AngularFireAuth
   ) { }
 
   createUser(email: string, password: string) {
-    return this.af.createUserWithEmailAndPassword(email, password);
+    return this.af.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  login(email: string, password: string){
-    return this.af.signInWithEmailAndPassword(email, password);
+  login(email: string, password: string) {
+    return this.af.auth.signInWithEmailAndPassword(email, password);
   }
 
-  logout(){
-    return this.af.signOut();
+  logout() {
+    return this.af.auth.signOut();
   }
 
-  hasUser(){
+  hasUser() {
     return this.af.authState;
   }
-
-  loginRestApi(email: string, password: string){
-    return this.http.post('https://platzi-store.herokuapp.com/auth',{email,password});
-  }
-
 }

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthInterceptor } from './auth.interceptor';
+import { PreloadService } from './preload.service';
 
-xdescribe('AuthInterceptor', () => {
+describe('PreloadService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AuthInterceptor = TestBed.get(AuthInterceptor);
+    const service: PreloadService = TestBed.get(PreloadService);
     expect(service).toBeTruthy();
   });
 });

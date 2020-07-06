@@ -1,6 +1,6 @@
 import { ExponentialPipe } from './exponential.pipe';
 
-xdescribe('ExponentialPipe', () => {
+describe('ExponentialPipe', () => {
   it('create an instance', () => {
     const pipe = new ExponentialPipe();
     expect(pipe).toBeTruthy();

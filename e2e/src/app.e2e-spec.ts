@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-xdescribe('workspace-project App', () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ xdescribe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('platzi-store app is running!');
+    expect(page.getTitleText()).toEqual('platzi-store-perf app is running!');
   });
 
   afterEach(async () => {

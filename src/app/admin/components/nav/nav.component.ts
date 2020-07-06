@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '@core/services/auth.service';
-import { Router } from '@angular/router';
+
+import { AuthService } from './../../../core/services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,18 +21,15 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router
-  ) {
+  ) {}
 
-  }
-
-  logout(){
-    this.authService.logout().then(()=>{
-      this.router.navigate(['/auth/login']);
-    }).catch(()=>{
-      console.log("No se pudo hacer log out, debe haber habido un error");
-    })
+  logout() {
+    this.auth.logout()
+    .then(() => {
+      this.router.navigate(['./home']);
+    });
   }
 
 }
