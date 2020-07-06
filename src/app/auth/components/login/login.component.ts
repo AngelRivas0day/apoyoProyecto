@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.buildForm();
   }
@@ -24,6 +26,13 @@ export class LoginComponent implements OnInit {
   login(event: Event) {
     event.preventDefault();
     console.log(this.form.value);
+    if(this.form.valid){
+      this.authService.login(this.form.value.email, this.form.value.password).then(()=>{
+        this.router.navigate(['/admin']);
+      }).catch(()=>{
+        console.log("las credenciales no son validas");
+      });
+    }
   }
 
   private buildForm() {
@@ -31,6 +40,12 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
+  }
+
+  loginApi(){
+    this.authService.loginRestApi('angel@test.com', '1234').subscribe((data:any)=>{
+      console.log(data);
+    })
   }
 
 }

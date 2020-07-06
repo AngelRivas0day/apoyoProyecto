@@ -4,6 +4,7 @@ import { Product } from './../../models/product.model';
 import { environment } from './../../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
+import * as Sentry from '@sentry/browser';
 
 interface User{
   email: String,
@@ -42,7 +43,7 @@ export class ProductsService {
   }
 
   getRandomUsers(): Observable<User[]>{
-    return this.http.get('https://randomuser.me/api/?results=2')
+    return this.http.get('https://randomuser.me/api/?results=1')
     .pipe(
       retry(3),
       catchError(this.errorHandler),
@@ -52,8 +53,13 @@ export class ProductsService {
     )
   }
 
+  getFile(){
+    
+  }
+
   private errorHandler(error: HttpErrorResponse){
     console.log(error);
+    Sentry.captureException(error);
     return throwError('Ups, algo salio mal');
   }
 
