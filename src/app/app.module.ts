@@ -25,7 +25,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     LayoutComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     QuicklinkModule,
     AppRoutingModule,
     FormsModule,

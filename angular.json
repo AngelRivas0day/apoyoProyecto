@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/platzi-store-perf",
+            "outputPath": "dist/platzi-store-perf/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -127,8 +127,59 @@
               "devServerTarget": "platzi-store-perf:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/platzi-store-perf/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "platzi-store-perf:build",
+            "serverTarget": "platzi-store-perf:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "platzi-store-perf:build:production",
+              "serverTarget": "platzi-store-perf:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "platzi-store-perf:build:production",
+            "serverTarget": "platzi-store-perf:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
-    }},
-  "defaultProject": "platzi-store-perf"
+    }
+  },
+  "defaultProject": "platzi-store-perf",
+  "cli": {
+    "analytics": "9571b35d-9b9e-45e6-9126-a5b093d8e385"
+  }
 }
