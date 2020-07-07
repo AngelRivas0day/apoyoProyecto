@@ -1,1 +1,10 @@
-<p>contact</p>
+<h1>Contactos</h1>
+<app-list
+    (add)="addItem(salesList, $event)"
+    title="lista de ventas"
+    [data]='salesList'></app-list>
+
+<app-list
+    (add)="addItem(bList, $event)"
+    title="Lista b"
+    [data]='bList'></app-list>
